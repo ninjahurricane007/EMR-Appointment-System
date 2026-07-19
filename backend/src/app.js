@@ -2,6 +2,9 @@ const express = require("express")
 const cors = require("cors")
 const cookieParser = require("cookie-parser")
 
+const authRoutes = require("./routes/auth.routes")
+const errorHandler = require("./middlewares/error.middleware")
+
 const app = express()
 
 app.use(cors())
@@ -13,5 +16,9 @@ app.get("/", (req, res) => {
         message: "EMR Appointment System API Running"
     })
 })
+
+app.use("/api/v1/auth", authRoutes)
+
+app.use(errorHandler);
 
 module.exports = app
